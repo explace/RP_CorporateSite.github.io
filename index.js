@@ -14,17 +14,18 @@ const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector("#myCanvas")
 });
 //renderer.setSize(width, height,false);
-renderer.setSize(window.innerWidth/2, window.innerHeight/2, false);
+//renderer.setSize(window.innerWidth/2, window.innerHeight/2, false);
+renderer.setSize(window.innerWidth, window.innerHeight, false);
 renderer.setPixelRatio(`window`.devicePixelRatio);
 document.body.appendChild( renderer.domElement );
 
 
 // カメラ作成：new THREE.PerspectiveCamera(画角, アスペクト比, 描画開始距離, 描画終了距離)
 const camera = new THREE.PerspectiveCamera(
-  75, window.innerWidth / window.innerHeight, 1, 10000
+  45, window.innerWidth / window.innerHeight, 1, 10000
 );
 // カメラの初期座標を設定（X座標:0, Y座標:0, Z座標:0）
-camera.position.set(0, 0, 4000);
+camera.position.set(0, 2000, 7000);
 //カメラコントローラーを作成
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; //摩擦効果
@@ -58,9 +59,9 @@ scene.add(light);
 
 //3Dモデル読み込み
 const loader = new GLTFLoader();
-loader.load('Obj/sample3D/scene.gltf', function (gltf) {
+loader.load('Obj/Mt Fuji.glb', function (gltf) {
     const model = gltf.scene;
-    model.scale.set(10, 10, 10);
+    model.scale.set(500, 500, 500);
     model.position.set(0,0,0);
     scene.add(model);
 }, undefined, function (error) {
