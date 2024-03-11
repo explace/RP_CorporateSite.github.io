@@ -59,7 +59,7 @@ scene.add(light);
 
 //3Dモデル読み込み
 const loader = new GLTFLoader();
-loader.load('Obj/Mt Fuji.glb', function (gltf) {
+loader.load('Obj/mtfuji.glb', function (gltf) {
     const model = gltf.scene;
     model.scale.set(500, 500, 500);
     model.position.set(0,0,0);
