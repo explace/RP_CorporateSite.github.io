@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import WebGL from 'three/addons/capabilities/WebGL.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 //import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
@@ -81,14 +80,4 @@ function animate() {
 }
 animate();
 
-//ユーザーブラウザでのWebGL互換性確認
-if ( WebGL.isWebGLAvailable() ) {
-	// Initiate function or other initializations here
-	//tick()
-  animate();
-
-} else {
-	const warning = WebGL.getWebGLErrorMessage();
-	document.getElementById( 'container' ).appendChild( warning );
-}
 }
