@@ -36,22 +36,17 @@ controls.zoomSpeed = 0.5;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color( 0x2f4f4f );//背景色を指定
 
-// 見やすいようにヘルパー（網目）を設定
-//let gridHelper = new THREE.GridHelper();
-//scene.add(gridHelper);
-
-//Cube作成
-// new THREE.BoxGeometry(幅, 高さ, 奥行き)
-const geometry = new THREE.BoxGeometry(500, 500, 500);
-const material = new THREE.MeshPhongMaterial({
-  color: 0x44aa88
-});
-
-const box = new THREE.Mesh(geometry, material);
-//物体の位置を指定
-//box.position.set(0, 0, 0);
-// シーンに追加
-scene.add(box);
+////Cube作成
+//// new THREE.BoxGeometry(幅, 高さ, 奥行き)
+//const geometry = new THREE.BoxGeometry(500, 500, 500);
+//const material = new THREE.MeshPhongMaterial({
+//  color: 0x44aa88
+//});
+//const box = new THREE.Mesh(geometry, material);
+////物体の位置を指定
+////box.position.set(0, 0, 0);
+//// シーンに追加
+//scene.add(box);
 
 //平行光源
 // new THREE.DirectionalLight(色)
@@ -64,26 +59,33 @@ scene.add(light);
 
 //3Dモデル読み込み
 const loader = new GLTFLoader();
+loader.load('Obj/sample3D/scene.gltf', function (gltf) {
+    const model = gltf.scene;
+    model.scale.set(10, 10, 10);
+    model.position.set(0,0,0);
+    scene.add(model);
+}, undefined, function (error) {
+    console.error(error);
+});
 
+//初回実行でtickもある
+function animate() {
+  //controls.update();//Auto Rotate etc.
+  requestAnimationFrame(animate);
 
-// 初回実行
-tick()
-function tick() {
-  controls.update();
-  requestAnimationFrame(tick);
-
-  // 箱を回転させる
-  box.rotation.x += 0.01;
-  box.rotation.y += 0.01;
-
-  //レンダリング
+  // 箱回転
+  //box.rotation.x += 0.01;
+  //box.rotation.y += 0.01;
+  //Rendering
   renderer.render(scene, camera);
 }
+animate();
 
 //ユーザーブラウザでのWebGL互換性確認
 if ( WebGL.isWebGLAvailable() ) {
 	// Initiate function or other initializations here
-	tick()
+	//tick()
+  animate();
 
 } else {
 	const warning = WebGL.getWebGLErrorMessage();
